@@ -59,20 +59,20 @@ class Bot
 
   #MAIN METHOD
   def run
-    self.getMods()
-
-    #self.timed(@timers)
+    self.getMods() # Get mods
+    self.timed(@timers) # Initialize Timers
     until @socket.eof? do
       msg = @socket.gets
 
       puts msg
 
-      if msg.match(/^PING :(.*)$/)
+      if msg.match(/^PING :(.*)$/) # Stay alive via Ping/Pong response
         send "PONG #{$~[1]}"
         next
       end
 
-      if msg.match(/PRIVMSG ##{@channel} :(.*)$/)
+      # Begin message matching
+      if msg.match(/PRIVMSG ##{@channel} :(.*)$/) 
         fullmsg = $~[1]
         if fullmsg[0] == "!"
           nick = msg[/\:(.*?)!/,1].strip
@@ -95,7 +95,6 @@ class Bot
 
   # Sends messages to channel at set intervals
   def timed(hash)
-    tasks = Array.new() #THIS APPEARS TO BE UNNECESSARY ON SECOND LOOK
     hash.each do |interval, message|
       task = Concurrent::TimerTask.new(execution_interval: interval, timeout_interval: 60) do
         message_channel("#{message}") 

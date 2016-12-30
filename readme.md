@@ -1,6 +1,6 @@
 <snippet>
-  <content><![CDATA[
-# ${1:Ruby Twitch Bot}
+  <content><
+# Ruby Twitch Bot
 This is a simple twitch bot written in Ruby. OOTB allows for matched commands as well as timed events.
 ## Usage
 It is currently set up with an account I used during testing, which will never be used again.  Feel free to use the current account/oauth setup. If you wish to change, change the appropriate fields in the /initialize method.
